@@ -1,6 +1,7 @@
 package com.globant.web.tests;
 
 import org.testng.annotations.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.logging.Logger;
 
@@ -19,12 +20,12 @@ public class LogOutTest {
 
     @BeforeMethod
     public void logInUser() {
-        log.info("Log in the user");
+        log.info("Enter the user credentials for login");
     }
 
     @Test
     public void LogOut() {
-        log.info("Click on the icon upper right");
+        log.info("Click on the user icon upper right");
         log.info("Click on the Log Out option");
     }
 

@@ -26,7 +26,7 @@ public class LogInTest {
     @Parameters({"email", "password"})
     @Test
     public void LogIn(String email, String password) {
-        log.info("Click on the icon upper right");
+        log.info("Click on the user icon upper right");
         log.info("Click on the Log In option");
         log.info("Type the username " + email + " on the username or email address box");
         log.info("Type the password " + password + " on the password box");

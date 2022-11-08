@@ -19,12 +19,12 @@ public class DeleteAccountTest {
 
     @BeforeMethod
     public void logInUser() {
-        log.info("Log in the user");
+        log.info("Enter the user credentials for login");
     }
 
     @Test
     public void LogOut() {
-        log.info("Click on the icon upper right");
+        log.info("Click on the user icon upper right");
         log.info("Click on the ESPN Profile option");
         log.info("Scroll down");
         log.info("Click on the Delete Account option");
