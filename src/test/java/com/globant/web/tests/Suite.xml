@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="My test suite">
+    <parameter name="email" value="user1@email.com"></parameter>
+    <parameter name="password" value="user1@"></parameter>
+
+    <test name="My first test">
+        <classes>
+            <class name="com.globant.web.tests.LogInTest"></class>
+            <class name="com.globant.web.tests.LogOutTest"></class>
+
+        </classes>
+
+    </test>
+</suite>
