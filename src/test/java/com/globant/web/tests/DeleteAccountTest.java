@@ -4,8 +4,8 @@ import org.testng.annotations.*;
 
 import java.util.logging.Logger;
 
-public class LogOutTest {
-    Logger log = Logger.getLogger(String.valueOf(LogOutTest.class));
+public class DeleteAccountTest {
+    Logger log = Logger.getLogger(java.lang.String.valueOf(DeleteAccountTest.class));
 
     @BeforeClass
     public void openWebBrowser() {
@@ -25,11 +25,15 @@ public class LogOutTest {
     @Test
     public void LogOut() {
         log.info("Click on the icon upper right");
-        log.info("Click on the Log Out option");
+        log.info("Click on the ESPN Profile option");
+        log.info("Scroll down");
+        log.info("Click on the Delete Account option");
+        log.info("Click on the Yes, delete this account option");
     }
 
     @AfterClass
     public void closeBrowser() {
         log.info("Close the browser");
     }
+
 }

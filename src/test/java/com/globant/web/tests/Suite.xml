@@ -8,7 +8,7 @@
         <classes>
             <class name="com.globant.web.tests.LogInTest"></class>
             <class name="com.globant.web.tests.LogOutTest"></class>
-
+            <class name="com.globant.web.tests.DeleteAccountTest"></class>
         </classes>
 
     </test>
