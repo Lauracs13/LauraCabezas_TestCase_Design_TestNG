@@ -10,17 +10,22 @@ public class HomePage extends BasePage {
     private WebElement userIcon;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child>li:last-child>a")
     private WebElement loginElement;
-    @FindBy(css = ".view-starry-night >div:first-child")
+
+  // @FindBy(css = ".loading-container .view-starry-night")
+//@FindBy (xpath = "//*[@id=\"root\"]/div[3]/div/div/div[1]")
+  @FindBy(css = ".view-starry-night >div:first-child")
     private WebElement loginModal;
-    @FindBy(id = "logo")
+@FindBy (id = "oneid-iframe")
+private WebElement loginIframe;
+@FindBy(id = "logo")
     private WebElement espnLogo;
     @FindBy(css = ".input-InputLoginValue")
     private WebElement usernameInput;
     @FindBy(css = ".input-InputPassword")
     private WebElement loginPassword;
-    @FindBy(id = "button#BtnSubmit")
+    @FindBy(id = "BtnSubmit")
     private WebElement loginButton;
-    @FindBy(id = "button#BtnCreateAccount")
+    @FindBy(id = "BtnCreateAccount")
     private WebElement signUpButton;
 
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child:not(.alt-format)>li.display-user>span")
@@ -35,6 +40,9 @@ public class HomePage extends BasePage {
     }
     public void clickOnLogInOption() {
         super.clickElement(this.loginElement);
+    }
+    public void switchToLoginIframe() {
+        super.getDriver().switchTo().frame(this.loginIframe);
     }
     public boolean isLoginModalPresent() {
         super.waitForVisibility(this.loginModal);
