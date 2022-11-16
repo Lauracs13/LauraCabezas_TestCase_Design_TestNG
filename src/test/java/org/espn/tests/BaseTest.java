@@ -37,7 +37,7 @@ public class BaseTest {
         homepage.typeTheEmail(email);
         homepage.typeTheNewPassword(PASSWORD);
         //homepage.scrollToBottom();
-        homepage.clickOnLoginButton();
+        homepage.clickOnSubmitButton();
         homepage.waitForLoginSuccess();
         this.tearDown();
     }
@@ -79,7 +79,7 @@ public class BaseTest {
         homepage.typeTheUsername(email);
         homepage.clickOnPassword();
         homepage.typeThePassword(this.PASSWORD);
-        homepage.clickOnLoginButton();
+        homepage.clickOnSubmitButton();
 
     }
 
