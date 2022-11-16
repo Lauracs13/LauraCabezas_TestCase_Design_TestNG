@@ -1,23 +1,16 @@
 package org.espn.tests;
 
-import com.google.j2objc.annotations.Weak;
-import org.espn.configuration.Driver;
 import org.espn.pages.HomePage;
 import org.espn.pages.WatchPage;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.espn.pages.BasePage;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 
 public class LoginTest extends BaseTest {
 
-    @Parameters({"username1", "password1"})
+
     @Test
-    public void doingLogin(String username1, String password1) {
+    public void doingLogin() {
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogInOption();
         homepage.switchToLoginIframe();
@@ -26,8 +19,8 @@ public class LoginTest extends BaseTest {
         checkThat("Log In button is shown", homepage.isLogInButtonPresent(), is(true));
         checkThat("Sign Up button is shown", homepage.isSignUpButtonPresent(), is(true));
         homepage.closeModalLogin();
-        homepage.exitTheLoginIFrame();
-        this.logIn(username1, password1);
+        homepage.exitTheIFrame();
+       this.logIn();
         WatchPage watchPage = homepage.switchToWatchPage();
         checkThat("All cards from first carousel have title", watchPage.haveAllCardsTitle(), is(true));
         checkThat("All cards from first carousel have description", watchPage.haveAllCardsDescription(), is(true));
@@ -35,5 +28,7 @@ public class LoginTest extends BaseTest {
         checkThat("Close button is shown", watchPage.isCloseModalButton(), is(true));
         watchPage.clickOnCloseModalButton();
         HomePage homePage = watchPage.goBackToHomePage();
+        homepage.hoverTheMouseOnUserIcon();
+        checkThat("User name is correct", homePage.navText(), is("Welcome pepito!"));
     }
 }

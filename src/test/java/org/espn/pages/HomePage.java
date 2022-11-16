@@ -24,12 +24,28 @@ public class HomePage extends BasePage {
     private WebElement loginButton;
     @FindBy(id = "BtnCreateAccount")
     private WebElement signUpButton;
+    @FindBy(id = "InputFirstName")
+    private WebElement inputFirstName;
+    @FindBy(id = "InputLastName")
+    private WebElement inputLastName;
+    @FindBy(id = "InputEmail")
+    private WebElement inputEmail;
+    @FindBy(id = "password-new")
+    private WebElement inputNewPassword;
     @FindBy(id = "close")
     private WebElement closeModalLogin;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child:not(.alt-format)>li.display-user>span")
     private WebElement welcomeUserMessage;
     @FindBy(css = "#global-nav > ul > li.pillar.watch > a > span > span.link-text")
     private WebElement watchOption;
+
+    @FindBy(css = ".promo-banner-container iframe")
+    private WebElement promoBannerIframe;
+    @FindBy(css = ".PromoBanner__CloseBtn")
+    private WebElement promoBannerCloseBtn;
+
+    @FindBy(id = "sideLogin-left-rail")
+    private WebElement divOneIdWrapper;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -47,7 +63,11 @@ public class HomePage extends BasePage {
         super.getDriver().switchTo().frame(this.loginIframe);
     }
 
-    public void exitTheLoginIFrame() {
+    public void switchToPromoBannerIframe() {
+        super.getDriver().switchTo().frame(this.promoBannerIframe);
+    }
+
+    public void exitTheIFrame() {
         super.getDriver().switchTo().defaultContent();
     }
 
@@ -75,6 +95,10 @@ public class HomePage extends BasePage {
         return this.signUpButton.isDisplayed();
     }
 
+    public void clickOnSignUpButton() {
+        super.clickElement(this.signUpButton);
+    }
+
     public void clickOnUsername() {
         super.clickElement(this.usernameInput);
     }
@@ -95,12 +119,37 @@ public class HomePage extends BasePage {
         super.typeOnInput(this.loginPassword, text);
     }
 
+    public void typeTheFirstName(String text) {
+        super.typeOnInput(this.inputFirstName, text);
+    }
+
+    public void typeTheLastName(String text) {
+        super.typeOnInput(this.inputLastName, text);
+    }
+
+    public void typeTheEmail(String text) {
+        super.typeOnInput(this.inputEmail, text);
+    }
+
+    public void typeTheNewPassword(String text) {
+        super.typeOnInput(this.inputNewPassword, text);
+    }
+
     public String navText() {
         super.waitForVisibility(this.welcomeUserMessage);
         return this.welcomeUserMessage.getText();
     }
-    public WatchPage switchToWatchPage(){
+
+    public WatchPage switchToWatchPage() {
         super.clickElement(this.watchOption);
         return new WatchPage(getDriver());
+    }
+
+    public void closePromoBanner() {
+        super.clickElement(this.promoBannerCloseBtn);
+    }
+
+    public void waitForLoginSuccess(){
+        super.waitForAttributeValue(this.divOneIdWrapper, "style", "display: none;");
     }
 }

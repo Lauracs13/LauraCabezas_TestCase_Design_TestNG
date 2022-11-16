@@ -8,13 +8,37 @@ import org.espn.reporting.Reporter;
 import org.testng.annotations.*;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+
 import static java.lang.String.format;
 
 
 public class BaseTest {
     private Driver driver;
     protected HomePage homepage;
+    private static final String FIRSTNAME = "pepito";
+    private static final String LASTNAME = "perez";
+    private final String PASSWORD = "pepitoPerez1";
+    private static String email = FIRSTNAME + "." + LASTNAME + (int)Math.floor(Math.random() * 1000) + "@email.com";
 
+    @Parameters({"browser", "url"})
+    @BeforeSuite
+    public void signUp(String browser, String url) {
+        this.testSetUp(browser, url);
+        homepage.switchToPromoBannerIframe();
+        homepage.closePromoBanner();
+        homepage.exitTheIFrame();
+        homepage.hoverTheMouseOnUserIcon();
+        homepage.clickOnLogInOption();
+        homepage.switchToLoginIframe();
+        homepage.clickOnSignUpButton();
+        homepage.typeTheFirstName(FIRSTNAME);
+        homepage.typeTheLastName(LASTNAME);
+        homepage.typeTheEmail(email);
+        homepage.typeTheNewPassword(PASSWORD);
+        homepage.clickOnLoginButton();
+        homepage.waitForLoginSuccess();
+        this.tearDown();
+    }
 
     @Parameters({"browser", "url"})
     @BeforeClass
@@ -28,10 +52,12 @@ public class BaseTest {
         homepage = new HomePage(driver.getDriver());
 
     }
+
     @AfterTest
     public void tearDown() {
         driver.getDriver().quit();
     }
+
     protected <T> void checkThat(
             String description, T actualValue, Matcher<? super T> expectedValue) {
         Reporter.info(
@@ -43,14 +69,14 @@ public class BaseTest {
         }
     }
 
-    protected void logIn(String username, String password){
+    protected void logIn() {
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogInOption();
         homepage.switchToLoginIframe();
         homepage.clickOnUsername();
-        homepage.typeTheUsername(username);
+        homepage.typeTheUsername(email);
         homepage.clickOnPassword();
-        homepage.typeThePassword(password);
+        homepage.typeThePassword(this.PASSWORD);
         homepage.clickOnLoginButton();
 
     }

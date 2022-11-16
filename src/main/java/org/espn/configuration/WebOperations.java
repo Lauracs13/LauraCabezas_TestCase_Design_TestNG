@@ -2,6 +2,7 @@ package org.espn.configuration;
 
 import static org.openqa.selenium.support.PageFactory.initElements;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -27,7 +28,7 @@ public class WebOperations {
     }
 
     public void clickElement(WebElement element) {
-       waitForClickable(element);
+        waitForClickable(element);
         element.click();
     }
 
@@ -52,6 +53,14 @@ public class WebOperations {
 
     public void waitForClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitToDisappear(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public void waitForAttributeValue(WebElement element, String attribute, String value) {
+        this.wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 
 }
