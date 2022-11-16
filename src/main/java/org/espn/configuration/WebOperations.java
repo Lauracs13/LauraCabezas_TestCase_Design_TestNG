@@ -18,7 +18,7 @@ public class WebOperations {
 
     public WebOperations(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
         initElements(driver, this);
     }
 
@@ -27,20 +27,24 @@ public class WebOperations {
     }
 
     public void clickElement(WebElement element) {
-        waitForClickable(element);
+       waitForClickable(element);
         element.click();
     }
+
     public void hoverTheMouseOnElement(WebElement element) {
         this.waitForVisibility(element);
         Actions action = new Actions(this.getDriver());
         action.moveToElement(element).perform();
     }
+
     public void typeOnInput(WebElement element, String text) {
         this.waitForVisibility(element);
         element.sendKeys(text);
     }
 
-    public void waitForVisibility(WebElement element) { wait.until(ExpectedConditions.visibilityOf(element)); }
+    public void waitForVisibility(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
 
     public void waitForVisibility(List<WebElement> elements) {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));

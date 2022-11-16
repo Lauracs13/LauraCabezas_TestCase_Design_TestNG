@@ -10,14 +10,11 @@ public class HomePage extends BasePage {
     private WebElement userIcon;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child>li:last-child>a")
     private WebElement loginElement;
-
-  // @FindBy(css = ".loading-container .view-starry-night")
-//@FindBy (xpath = "//*[@id=\"root\"]/div[3]/div/div/div[1]")
-  @FindBy(css = ".view-starry-night >div:first-child")
+    @FindBy(css = ".view-starry-night >div:first-child")
     private WebElement loginModal;
-@FindBy (id = "oneid-iframe")
-private WebElement loginIframe;
-@FindBy(id = "logo")
+    @FindBy(id = "oneid-iframe")
+    private WebElement loginIframe;
+    @FindBy(id = "logo")
     private WebElement espnLogo;
     @FindBy(css = ".input-InputLoginValue")
     private WebElement usernameInput;
@@ -27,9 +24,12 @@ private WebElement loginIframe;
     private WebElement loginButton;
     @FindBy(id = "BtnCreateAccount")
     private WebElement signUpButton;
-
+    @FindBy(id = "close")
+    private WebElement closeModalLogin;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child:not(.alt-format)>li.display-user>span")
     private WebElement welcomeUserMessage;
+    @FindBy(css = "#global-nav > ul > li.pillar.watch > a > span > span.link-text")
+    private WebElement watchOption;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -38,29 +38,55 @@ private WebElement loginIframe;
     public void hoverTheMouseOnUserIcon() {
         super.hoverTheMouseOnElement(this.userIcon);
     }
+
     public void clickOnLogInOption() {
         super.clickElement(this.loginElement);
     }
+
     public void switchToLoginIframe() {
         super.getDriver().switchTo().frame(this.loginIframe);
     }
+
+    public void exitTheLoginIFrame() {
+        super.getDriver().switchTo().defaultContent();
+    }
+
+    public void closeModalLogin() {
+        super.clickElement(this.closeModalLogin);
+    }
+
     public boolean isLoginModalPresent() {
         super.waitForVisibility(this.loginModal);
         return this.loginModal.isDisplayed();
     }
-    public boolean isESPNLogoPresent(){
+
+    public boolean isESPNLogoPresent() {
         super.waitForVisibility(this.espnLogo);
         return this.espnLogo.isDisplayed();
     }
-    public boolean isLogInButtonPresent(){
+
+    public boolean isLogInButtonPresent() {
         super.waitForVisibility(this.loginButton);
         return this.loginButton.isDisplayed();
     }
 
-    public boolean isSignUpButtonPresent(){
+    public boolean isSignUpButtonPresent() {
         super.waitForVisibility(this.signUpButton);
         return this.signUpButton.isDisplayed();
     }
+
+    public void clickOnUsername() {
+        super.clickElement(this.usernameInput);
+    }
+
+    public void clickOnPassword() {
+        super.clickElement(this.loginPassword);
+    }
+
+    public void clickOnLoginButton() {
+        super.clickElement(this.loginButton);
+    }
+
     public void typeTheUsername(String text) {
         super.typeOnInput(this.usernameInput, text);
     }
@@ -68,8 +94,13 @@ private WebElement loginIframe;
     public void typeThePassword(String text) {
         super.typeOnInput(this.loginPassword, text);
     }
-    public String navText(){
+
+    public String navText() {
         super.waitForVisibility(this.welcomeUserMessage);
         return this.welcomeUserMessage.getText();
+    }
+    public WatchPage switchToWatchPage(){
+        super.clickElement(this.watchOption);
+        return new WatchPage(getDriver());
     }
 }

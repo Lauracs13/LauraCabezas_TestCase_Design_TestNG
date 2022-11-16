@@ -2,6 +2,8 @@ package org.espn.tests;
 
 import org.espn.configuration.Driver;
 import org.espn.pages.HomePage;
+
+
 import org.espn.reporting.Reporter;
 import org.testng.annotations.*;
 import org.hamcrest.Matcher;
@@ -13,6 +15,7 @@ public class BaseTest {
     private Driver driver;
     protected HomePage homepage;
 
+
     @Parameters({"browser", "url"})
     @BeforeClass
     public void testSetUp(String browser, String url) {
@@ -23,6 +26,7 @@ public class BaseTest {
         driver.getDriver().get(url);
         driver.getDriver().manage().window().maximize();
         homepage = new HomePage(driver.getDriver());
+
     }
     @AfterTest
     public void tearDown() {
@@ -37,6 +41,18 @@ public class BaseTest {
         } catch (AssertionError e) {
             Reporter.error(format("Assertion Error: [%s]", e.getMessage().replaceAll("\n", "")));
         }
+    }
+
+    protected void logIn(String username, String password){
+        homepage.hoverTheMouseOnUserIcon();
+        homepage.clickOnLogInOption();
+        homepage.switchToLoginIframe();
+        homepage.clickOnUsername();
+        homepage.typeTheUsername(username);
+        homepage.clickOnPassword();
+        homepage.typeThePassword(password);
+        homepage.clickOnLoginButton();
+
     }
 
 }
