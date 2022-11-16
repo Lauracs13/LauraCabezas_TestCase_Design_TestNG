@@ -21,10 +21,10 @@ public class LoginTest extends BaseTest {
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogInOption();
         homepage.switchToLoginIframe();
-        checkThat("Login modal presented", homepage.isLoginModalPresent(), is(true));
-        checkThat("ESPN logo presented", homepage.isESPNLogoPresent(), is(true));
-        checkThat("Log In button presented", homepage.isLogInButtonPresent(), is(true));
-        checkThat("Sign Up button presented", homepage.isSignUpButtonPresent(), is(true));
+        checkThat("Login modal is shown", homepage.isLoginModalPresent(), is(true));
+        checkThat("ESPN logo is shown", homepage.isESPNLogoPresent(), is(true));
+        checkThat("Log In button is shown", homepage.isLogInButtonPresent(), is(true));
+        checkThat("Sign Up button is shown", homepage.isSignUpButtonPresent(), is(true));
         homepage.closeModalLogin();
         homepage.exitTheLoginIFrame();
         this.logIn(username1, password1);
@@ -32,5 +32,8 @@ public class LoginTest extends BaseTest {
         checkThat("All cards from first carousel have title", watchPage.haveAllCardsTitle(), is(true));
         checkThat("All cards from first carousel have description", watchPage.haveAllCardsDescription(), is(true));
         watchPage.clickOnSecondCard();
+        checkThat("Close button is shown", watchPage.isCloseModalButton(), is(true));
+        watchPage.clickOnCloseModalButton();
+        HomePage homePage = watchPage.goBackToHomePage();
     }
 }

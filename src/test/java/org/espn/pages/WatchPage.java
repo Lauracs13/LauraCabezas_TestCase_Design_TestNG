@@ -14,6 +14,8 @@ public class WatchPage extends BasePage {
     private WebElement firstCarousel;
     @FindBy(css = "section.BucketsContainer > div:first-child ul.Carousel__Inner li:nth-child(2) > a")
     private WebElement secondCard;
+    @FindBy(css = "svg.icon--color > use")
+    private WebElement closeModalButton;
 
     public WatchPage(WebDriver driver) {
         super(driver);
@@ -42,6 +44,19 @@ public class WatchPage extends BasePage {
     public void clickOnSecondCard() {
        super.clickElement(this.secondCard);
     }
+    public boolean isCloseModalButton() {
+             super.waitForVisibility(this.closeModalButton);
+        return this.closeModalButton.isDisplayed();
+    }
+    public void clickOnCloseModalButton() {
+        super.clickElement(this.closeModalButton);
+    }
+
+    public HomePage goBackToHomePage() {
+        super.getDriver().navigate().back();
+        return new HomePage(getDriver());
+    }
+
 }
 
 
