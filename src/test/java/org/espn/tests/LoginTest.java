@@ -20,7 +20,7 @@ public class LoginTest extends BaseTest {
         checkThat("Sign Up button is shown", homepage.isSignUpButtonPresent(), is(true));
         homepage.closeModalLogin();
         homepage.exitTheIFrame();
-       this.logIn();
+        this.logIn();
         WatchPage watchPage = homepage.switchToWatchPage();
         checkThat("All cards from first carousel have title", watchPage.haveAllCardsTitle(), is(true));
         checkThat("All cards from first carousel have description", watchPage.haveAllCardsDescription(), is(true));
@@ -30,5 +30,10 @@ public class LoginTest extends BaseTest {
         HomePage homePage = watchPage.goBackToHomePage();
         homepage.hoverTheMouseOnUserIcon();
         checkThat("User name is correct", homePage.navText(), is("Welcome pepito!"));
+        homepage.closePromoBannerIfExists();
+        homepage.hoverTheMouseOnUserIcon();
+        homepage.clickOnLogOutOption();
+        homepage.hoverTheMouseOnUserIcon();
+        checkThat("User name has removed successfully", homePage.navText(), is("Welcome!"));
     }
 }

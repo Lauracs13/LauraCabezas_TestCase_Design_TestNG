@@ -1,5 +1,7 @@
 package org.espn.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,6 +34,8 @@ public class HomePage extends BasePage {
     private WebElement inputEmail;
     @FindBy(id = "password-new")
     private WebElement inputNewPassword;
+    @FindBy(css = "#global-header .tools .global-user-container:last-child>ul:first-child>li:nth-child(5)>a")
+    private WebElement espnProfileOption;
     @FindBy(id = "close")
     private WebElement closeModalLogin;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child:not(.alt-format)>li.display-user>span")
@@ -58,7 +62,9 @@ public class HomePage extends BasePage {
     public void clickOnLogInOption() {
         super.clickElement(this.loginElement);
     }
-
+    public void clickOnLogOutOption() {
+        super.clickElement(this.loginElement);
+    }
     public void switchToLoginIframe() {
         super.getDriver().switchTo().frame(this.loginIframe);
     }
@@ -108,7 +114,10 @@ public class HomePage extends BasePage {
     }
 
     public void clickOnLoginButton() {
-        super.clickElement(this.loginButton);
+          super.clickElement(this.loginButton);
+    }
+    public void clickOnEspnProfile(){
+        super.clickElement(this.espnProfileOption);
     }
 
     public void typeTheUsername(String text) {
@@ -148,7 +157,26 @@ public class HomePage extends BasePage {
     public void closePromoBanner() {
         super.clickElement(this.promoBannerCloseBtn);
     }
+ public void closePromoBannerIfExists(){
 
+     boolean isPromoBannerShown;
+     WebElement promoBanner = null;
+     try {
+          promoBanner = super.getDriver().findElement(By.cssSelector(".promo-banner-container iframe"));
+         isPromoBannerShown = true;
+     } catch (NoSuchElementException e) {
+         isPromoBannerShown = false;
+     }
+     if(isPromoBannerShown){
+         super.getDriver().switchTo().frame(promoBanner);
+         WebElement closeBtn = super.getDriver().findElement(By.cssSelector(".PromoBanner__CloseBtn"));
+         super.clickElement(closeBtn);
+         super.getDriver().switchTo().defaultContent();
+     }
+ }
+ public void scrollToBottom(){
+        super.scrollToBottom();
+ }
     public void waitForLoginSuccess(){
         super.waitForAttributeValue(this.divOneIdWrapper, "style", "display: none;");
     }

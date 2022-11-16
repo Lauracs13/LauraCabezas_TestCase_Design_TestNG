@@ -24,9 +24,10 @@ public class BaseTest {
     @BeforeSuite
     public void signUp(String browser, String url) {
         this.testSetUp(browser, url);
-        homepage.switchToPromoBannerIframe();
+/*        homepage.switchToPromoBannerIframe();
         homepage.closePromoBanner();
-        homepage.exitTheIFrame();
+        homepage.exitTheIFrame();*/
+        homepage.closePromoBannerIfExists();
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogInOption();
         homepage.switchToLoginIframe();
@@ -35,6 +36,7 @@ public class BaseTest {
         homepage.typeTheLastName(LASTNAME);
         homepage.typeTheEmail(email);
         homepage.typeTheNewPassword(PASSWORD);
+        //homepage.scrollToBottom();
         homepage.clickOnLoginButton();
         homepage.waitForLoginSuccess();
         this.tearDown();
@@ -53,7 +55,7 @@ public class BaseTest {
 
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         driver.getDriver().quit();
     }

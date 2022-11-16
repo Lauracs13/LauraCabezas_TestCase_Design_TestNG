@@ -28,6 +28,7 @@ public class WebOperations {
     }
 
     public void clickElement(WebElement element) {
+        waitForVisibility(element);
         waitForClickable(element);
         element.click();
     }
@@ -57,6 +58,10 @@ public class WebOperations {
 
     public void waitToDisappear(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public void scrollToBottom(){
+        new Actions(getDriver()).sendKeys(Keys.PAGE_DOWN).build().perform();
     }
 
     public void waitForAttributeValue(WebElement element, String attribute, String value) {
