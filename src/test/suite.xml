@@ -10,8 +10,8 @@
     <test name="ESPNUserFlow">
 
         <classes>
-         <!--   <class name="org.espn.tests.LoginTest"/>
-            <class name="org.espn.tests.LogoutTest"/>-->
+            <class name="org.espn.tests.LoginTest"/>
+            <class name="org.espn.tests.LogoutTest"/>
             <class name="org.espn.tests.DeactivateAccountTest"></class>
         </classes>
     </test>

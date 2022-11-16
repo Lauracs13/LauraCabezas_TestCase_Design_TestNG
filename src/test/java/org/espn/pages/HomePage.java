@@ -44,7 +44,7 @@ public class HomePage extends BasePage {
     private WebElement closeModalLogin;
     @FindBy(css = "#global-header .tools .global-user-container>ul:first-child:not(.alt-format)>li.display-user>span")
     private WebElement welcomeUserMessage;
-    @FindBy(css = "#global-nav > ul > li.pillar.watch > a > span > span.link-text")
+    @FindBy(css = "li.watch > a")
     private WebElement watchOption;
 
     @FindBy(css = ".promo-banner-container iframe")

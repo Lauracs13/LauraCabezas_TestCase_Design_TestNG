@@ -22,7 +22,7 @@ public class BaseTest {
 
     @Parameters({"browser", "url"})
     @BeforeSuite
-    public void signUp(String browser, String url) {
+    public void signUp(String browser, String url) throws InterruptedException {
         this.testSetUp(browser, url);
 /*        homepage.switchToPromoBannerIframe();
         homepage.closePromoBanner();
@@ -36,7 +36,7 @@ public class BaseTest {
         homepage.typeTheLastName(LASTNAME);
         homepage.typeTheEmail(email);
         homepage.typeTheNewPassword(PASSWORD);
-        //homepage.scrollToBottom();
+        homepage.waitForSeconds(1);
         homepage.clickOnSubmitButton();
         homepage.waitForLoginSuccess();
         this.tearDown();
