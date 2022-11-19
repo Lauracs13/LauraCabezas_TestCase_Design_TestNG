@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
         watchPage.clickOnCloseModalButton();
         HomePage homePage = watchPage.goBackToHomePage();
         homepage.hoverTheMouseOnUserIcon();
-        checkThat("User name is correct", homePage.navText(), is("Welcome pepito!"));
+        checkThat("User name is correct", homePage.navText(), is("Welcome pepita!"));
         homepage.closePromoBannerIfExists();
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogOutOption();

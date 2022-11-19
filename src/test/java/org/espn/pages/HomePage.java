@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.lang.Thread;
 
 public class HomePage extends BasePage {
@@ -25,15 +26,14 @@ public class HomePage extends BasePage {
     private WebElement loginPassword;
     @FindBy(css = "button#BtnSubmit")
     private WebElement btnSubmit;
+    @FindBy(css = "form.delete-profile-success button#BtnSubmit")
+    private WebElement btnSubmit2;
     @FindBy(id = "BtnCreateAccount")
     private WebElement signUpButton;
     @FindBy(id = "InputFirstName")
     private WebElement inputFirstName;
     @FindBy(id = "InputLastName")
     private WebElement inputLastName;
-
-    @FindBy(css = "div.loading-indicator")
-    private WebElement loadingIndicator;
     @FindBy(id = "InputEmail")
     private WebElement inputEmail;
     @FindBy(id = "password-new")
@@ -46,32 +46,25 @@ public class HomePage extends BasePage {
     private WebElement welcomeUserMessage;
     @FindBy(css = "li.watch > a")
     private WebElement watchOption;
-
-    @FindBy(css = ".promo-banner-container iframe")
-    private WebElement promoBannerIframe;
+    @FindBy(id = "sideLogin-left-rail")
+    private WebElement alternativeLogIn;
     @FindBy(css = ".PromoBanner__CloseBtn")
     private WebElement promoBannerCloseBtn;
     @FindBy(css = "a#AccountDeleteLink")
     private WebElement accountDeleteLink;
-    @FindBy(css = "p#TextSuccess")
-    private WebElement messageDeactivateAccount;
     @FindBy(css = "h2#Title")
     private WebElement modalTitle;
     @FindBy(id = "sideLogin-left-rail")
     private WebElement divOneIdWrapper;
-    @FindBy(css = "form.form-section")
-    private WebElement formSection;
-    @FindBy(css ="form.form-section #BtnSubmit")
+    @FindBy(css = "p.text-left + button#BtnSubmit")
     private WebElement confirmDeleteAccountBtn;
-//@FindBy(css = "#TextError + #BtnSubmit")
-    @FindBy(css = "form.form-section #BtnSubmit")
-    private WebElement okBtn;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public void hoverTheMouseOnUserIcon() {
+        super.waitForVisibility(this.userIcon);
         super.hoverTheMouseOnElement(this.userIcon);
     }
 
@@ -82,15 +75,10 @@ public class HomePage extends BasePage {
     public void clickOnLogOutOption() {
         super.clickElement(this.loginElement);
     }
-public void confirmLogOut(){
-    if (this.loginElement.getText().equals("Log Out")) {
-        super.clickElement(this.loginElement);
-            }
-}
+
     public void switchToLoginIframe() {
         super.getDriver().switchTo().frame(this.loginIframe);
     }
-
 
     public void exitTheIFrame() {
         super.getDriver().switchTo().defaultContent();
@@ -120,13 +108,6 @@ public void confirmLogOut(){
         return this.signUpButton.isDisplayed();
     }
 
-    public boolean isDeactivateAccountMessagePresent() {
-        super.waitForVisibility(this.messageDeactivateAccount);
-        return this.messageDeactivateAccount.isDisplayed();
-    }
-public void waitForSeconds(int seconds) throws InterruptedException {
-    Thread.sleep(seconds*1000);
-}
     public void clickOnSignUpButton() {
         super.clickElement(this.signUpButton);
     }
@@ -140,7 +121,12 @@ public void waitForSeconds(int seconds) throws InterruptedException {
     }
 
     public void clickOnSubmitButton() {
+        super.waitForVisibility(this.btnSubmit);
         super.clickElement(this.btnSubmit);
+    }
+
+    public void clickOnConfirm() {
+        super.clickElement(this.btnSubmit2);
     }
 
     public void clickOnEspnProfile() {
@@ -150,12 +136,11 @@ public void waitForSeconds(int seconds) throws InterruptedException {
     public void clickOnDeleteAccountLink() {
         super.clickElement(this.accountDeleteLink);
     }
-public void clickOnConfirmDeleteAccount(){
+
+    public void clickOnConfirmDeleteAccount() {
         super.clickElement(this.confirmDeleteAccountBtn);
-}
-public void clickOnConfirmBtn(){
-        super.clickElement(this.okBtn);
-}
+    }
+
     public void typeTheUsername(String text) {
         super.typeOnInput(this.usernameInput, text);
     }
@@ -184,10 +169,12 @@ public void clickOnConfirmBtn(){
         super.waitForVisibility(this.welcomeUserMessage);
         return this.welcomeUserMessage.getText();
     }
+
     public String modalTitleText() {
         super.waitForVisibility(this.modalTitle);
         return this.modalTitle.getText();
     }
+
     public WatchPage switchToWatchPage() {
         super.clickElement(this.watchOption);
         return new WatchPage(getDriver());
@@ -222,10 +209,9 @@ public void clickOnConfirmBtn(){
     public void waitForLoginSuccess() {
         super.waitForAttributeValue(this.divOneIdWrapper, "style", "display: none;");
     }
-    public void waitForDeleteConfirmation() {
-        super.waitForAttributeValue(this.formSection, "class", "form-section delete-profile-success");
+
+    public void waitForDeactivateAccountSuccess() {
+        super.waitForAttributeValue(this.alternativeLogIn, "style", "display: block;");
     }
-    public void waitToDisappearLoadingIndicator(){
-        super.waitToDisappear(this.loadingIndicator);
-    }
+
 }

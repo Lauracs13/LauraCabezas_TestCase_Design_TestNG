@@ -15,18 +15,15 @@ import static java.lang.String.format;
 public class BaseTest {
     private Driver driver;
     protected HomePage homepage;
-    private static final String FIRSTNAME = "pepito";
+    private static final String FIRSTNAME = "pepita";
     private static final String LASTNAME = "perez";
-    private final String PASSWORD = "pepitoPerez1";
-    private static String email = FIRSTNAME + "." + LASTNAME + (int)Math.floor(Math.random() * 1000) + "@email.com";
+    private final String PASSWORD = "pepitaPerez1";
+    private static String email = FIRSTNAME + "." + LASTNAME + (int) Math.floor(Math.random() * 10000) + "@email.com";
 
     @Parameters({"browser", "url"})
     @BeforeSuite
-    public void signUp(String browser, String url) throws InterruptedException {
+    public void signUp(String browser, String url) {
         this.testSetUp(browser, url);
-/*        homepage.switchToPromoBannerIframe();
-        homepage.closePromoBanner();
-        homepage.exitTheIFrame();*/
         homepage.closePromoBannerIfExists();
         homepage.hoverTheMouseOnUserIcon();
         homepage.clickOnLogInOption();
@@ -36,7 +33,7 @@ public class BaseTest {
         homepage.typeTheLastName(LASTNAME);
         homepage.typeTheEmail(email);
         homepage.typeTheNewPassword(PASSWORD);
-        homepage.waitForSeconds(1);
+        homepage.scrollToBottom();
         homepage.clickOnSubmitButton();
         homepage.waitForLoginSuccess();
         this.tearDown();
